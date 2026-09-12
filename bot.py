@@ -4,6 +4,7 @@ import asyncio
 import os
 import random
 import math
+import base64
 
 from collections import deque
 from dataclasses import dataclass
@@ -22,6 +23,27 @@ from dotenv import load_dotenv
 # ============================================================
 
 load_dotenv()
+
+# ============================================================
+# YouTube 쿠키 설정
+# Railway 환경변수 YT_COOKIES_B64 → /tmp/youtube_cookies.txt
+# ============================================================
+YT_COOKIES_B64 = os.getenv("YT_COOKIES_B64")
+YT_COOKIES_FILE = "/tmp/youtube_cookies.txt"
+
+if YT_COOKIES_B64:
+    try:
+        with open(YT_COOKIES_FILE, "wb") as f:
+            f.write(base64.b64decode(YT_COOKIES_B64))
+
+        print("[YOUTUBE] 쿠키 파일 로드 완료")
+
+    except Exception as e:
+        print(f"[YOUTUBE] 쿠키 파일 생성 실패: {e}")
+        YT_COOKIES_FILE = None
+else:
+    YT_COOKIES_FILE = None
+    print("[YOUTUBE] 쿠키 없음")
 
 TOKEN = os.getenv("DISCORD_TOKEN")
 GUILD_ID_RAW = os.getenv("GUILD_ID")
@@ -82,6 +104,9 @@ YTDL_OPTIONS = {
     "quiet": True,
     "no_warnings": True,
     "ignoreerrors": True,
+    
+    # YouTube 쿠키
+    "cookiefile": YT_COOKIES_FILE,
 
     # YouTube 클라이언트 설정
     "extractor_args": {
