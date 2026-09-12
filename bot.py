@@ -99,12 +99,12 @@ class Track:
 # ============================================================
 
 YTDL_OPTIONS = {
-    "format": "bestaudio[ext=m4a]/bestaudio/best",
+    "format": "bestaudio/best",
     "noplaylist": True,
     "quiet": True,
     "no_warnings": True,
     "ignoreerrors": True,
-    
+
     # YouTube 쿠키
     "cookiefile": YT_COOKIES_FILE,
 
