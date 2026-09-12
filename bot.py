@@ -108,13 +108,6 @@ YTDL_OPTIONS = {
     # YouTube 쿠키
     "cookiefile": YT_COOKIES_FILE,
 
-    # YouTube 클라이언트 설정
-    "extractor_args": {
-        "youtube": {
-            "player_client": ["android", "web"],
-        }
-    },
-
     # YouTube EJS
     "js_runtimes": {
         "node": {},
