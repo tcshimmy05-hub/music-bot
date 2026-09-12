@@ -81,15 +81,21 @@ YTDL_OPTIONS = {
     "noplaylist": True,
     "quiet": True,
     "no_warnings": True,
-
-    # 존재하지 않거나 접근할 수 없는 영상은 가능한 한 건너뜀
     "ignoreerrors": True,
+
+    # YouTube 클라이언트 설정
+    "extractor_args": {
+        "youtube": {
+            "player_client": ["android", "web"],
+        }
+    },
 
     # YouTube EJS
     "js_runtimes": {
         "node": {},
     },
 }
+
 
 
 # ============================================================
